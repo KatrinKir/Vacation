@@ -17,33 +17,52 @@ namespace Vacation
             InitializeComponent();
             // Get a reference to the trips collection.
             Trips _trips = (Trips)this.Resources["trips"];
+            Trips _hotels = (Trips)this.Resources["hotels"];
 
             using (var reader = new StreamReader(@"C:\code\reisid.txt"))
             {
+                Decimal abix;
+                Random rnd = new Random();
+
                 while (!reader.EndOfStream)
                 {
                     var line = reader.ReadLine();
                     var values = line.Split(';');
+                    Decimal.TryParse(values[2], out abix);
                     _trips.Add(new Trip()
                     {
                         ProjectName = values[0],
                         TripName = values[1],
+                        TripPrice = abix,
+                        //Complete = (rnd.Next(1, 20) % 2 == 0)
+                    });
 
+                }
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(';');
+                    Decimal.TryParse(values[2], out abix);
+                    _hotels.Add(new Trip()
+                    {
+                        ProjectName = values[0],
+                        HotelPrice = abix,
+                        //Complete = (rnd.Next(1, 20) % 2 == 0)
                     });
                 }
             }
 
-                // Generate some trip data and add it to the trip list.
-                for (int i = 1; i <= 14; i++)
-                {
-                    _trips.Add(new Trip()
-                    {
-                        ProjectName = "Kontinent " + ((i % 3) + 1).ToString(),
-                        TripName = "Riik " + i.ToString(),
-                        DueDate = DateTime.Now.AddDays(i),
-                        Complete = (i % 2 == 0)
-                    });
-                }
+            //// Generate some trip data and add it to the trip list.
+            //for (int i = 1; i <= 14; i++)
+            //{
+            //    _trips.Add(new Trip()
+            //    {
+            //        ProjectName = "Kontinent " + ((i % 3) + 1).ToString(),
+            //        TripName = "Riik " + i.ToString(),
+            //        DueDate = DateTime.Now.AddDays(i),
+            //        Complete = (i % 2 == 0)
+            //    });
+            //}
 
         }
 
@@ -54,7 +73,9 @@ namespace Vacation
             {
                 cvTrips.GroupDescriptions.Clear();
             }
+
         }
+
 
         private void GroupButton_Click(object sender, RoutedEventArgs e)
         {
@@ -118,24 +139,28 @@ namespace Vacation
         // data collection and edits made in the DataGrid.
 
         // Private trip data.
-        private string m_ProjectName = string.Empty;
+        private string m_Continent = string.Empty;
         private string m_TripName = string.Empty;
-        private DateTime m_DueDate = DateTime.Now;
+        private Decimal m_TripPrice = 0;
+        private Decimal m_HotelPrice = 0;
+        private string m_HotelName = string.Empty;
         private bool m_Complete = false;
+        private bool m_Hotel = false;
 
         // Data for undoing canceled edits.
         private Trip temp_Trip = null;
+        private Trip temp_Hotel = null;
         private bool m_Editing = false;
 
         // Public properties. 
         public string ProjectName
         {
-            get { return this.m_ProjectName; }
+            get { return this.m_Continent; }
             set
             {
-                if (value != this.m_ProjectName)
+                if (value != this.m_Continent)
                 {
-                    this.m_ProjectName = value;
+                    this.m_Continent = value;
                     NotifyPropertyChanged("ProjectName");
                 }
             }
@@ -154,15 +179,30 @@ namespace Vacation
             }
         }
 
-        public DateTime DueDate
+        public Decimal TripPrice
         {
-            get { return this.m_DueDate; }
+            get { return this.m_TripPrice; }
             set
             {
-                if (value != this.m_DueDate)
+                if (value != this.m_TripPrice)
                 {
-                    this.m_DueDate = value;
-                    NotifyPropertyChanged("DueDate");
+                    this.m_TripPrice = value;
+                    NotifyPropertyChanged("Trip Price");
+                }
+            }
+        }
+
+        
+
+        public Decimal HotelPrice
+        {
+            get { return this.m_HotelPrice; }
+            set
+            {
+                if (value != this.m_HotelPrice)
+                {
+                    this.m_HotelPrice = value;
+                    NotifyPropertyChanged("Hotel Price");
                 }
             }
         }
@@ -174,6 +214,29 @@ namespace Vacation
             {
                 if (value != this.m_Complete)
                 {
+                    if (value)
+                    {
+                        MessageBox.Show( this.m_TripName + " price " + this.m_TripPrice.ToString() + " €");
+                    }
+                   
+                    this.m_Complete = value;
+                    NotifyPropertyChanged("Complete");
+                }
+            }
+        }
+
+        public bool Hotel
+        {
+            get { return this.m_Complete; }
+            set
+            {
+                if (value != this.m_Complete)
+                {
+                    if (value)
+                    {
+                        MessageBox.Show("Hotel price " + this.m_HotelPrice.ToString() + "€");
+                    }
+
                     this.m_Complete = value;
                     NotifyPropertyChanged("Complete");
                 }
@@ -197,6 +260,7 @@ namespace Vacation
             if (m_Editing == false)
             {
                 temp_Trip = this.MemberwiseClone() as Trip;
+                temp_Hotel = this.MemberwiseClone() as Trip;
                 m_Editing = true;
             }
         }
@@ -207,8 +271,10 @@ namespace Vacation
             {
                 this.ProjectName = temp_Trip.ProjectName;
                 this.TripName = temp_Trip.TripName;
-                this.DueDate = temp_Trip.DueDate;
+                this.TripPrice = temp_Trip.TripPrice;
                 this.Complete = temp_Trip.Complete;
+                this.HotelPrice = temp_Hotel.HotelPrice;
+                this.Complete = temp_Hotel.Complete;
                 m_Editing = false;
             }
         }
@@ -218,6 +284,7 @@ namespace Vacation
             if (m_Editing == true)
             {
                 temp_Trip = null;
+                temp_Hotel = null;
                 m_Editing = false;
             }
         }

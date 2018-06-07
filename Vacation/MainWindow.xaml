@@ -82,11 +82,12 @@
             </DataGrid.RowStyle>
         </DataGrid>
         <StackPanel Orientation="Horizontal" Grid.Row="1">
-            <TextBlock Text=" Filter completed items " VerticalAlignment="Center" />
+            <TextBlock Text=" Filter indicated items " VerticalAlignment="Center" />
             <CheckBox x:Name="cbCompleteFilter" VerticalAlignment="Center"
                       Checked="CompleteFilter_Changed" Unchecked="CompleteFilter_Changed" />
             <Button Content="Remove Groups" Margin="10,2,2,2" Click="UngroupButton_Click" />
             <Button Content="Group by Project/Status" Margin="2" Click="GroupButton_Click" />
         </StackPanel>
+        
     </Grid>
 </Window>
