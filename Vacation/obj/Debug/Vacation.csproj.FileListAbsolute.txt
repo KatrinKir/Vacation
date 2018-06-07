@@ -1,0 +1,16 @@
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.csprojAssemblyReference.cache
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\MainWindow.g.cs
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\App.g.cs
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\GeneratedInternalTypeHelper.g.cs
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation_MarkupCompile.cache
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation_MarkupCompile.lref
+c:\users\katri\source\repos\Vacation\Vacation\bin\Debug\Vacation.exe.config
+c:\users\katri\source\repos\Vacation\Vacation\bin\Debug\Vacation.exe
+c:\users\katri\source\repos\Vacation\Vacation\bin\Debug\Vacation.pdb
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\MainWindow.baml
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.g.resources
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.Properties.Resources.resources
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.csproj.GenerateResource.cache
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.csproj.CoreCompileInputs.cache
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.exe
+c:\users\katri\source\repos\Vacation\Vacation\obj\Debug\Vacation.pdb
