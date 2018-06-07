@@ -21,35 +21,28 @@ namespace Vacation
 
             using (var reader = new StreamReader(@"C:\code\reisid.txt"))
             {
-                Decimal abix;
+                Decimal trPrice;
+                Decimal htPrice;
                 Random rnd = new Random();
 
-                while (!reader.EndOfStream)
+                while (!reader.EndOfStream) // loeme faili sisu nimekirja
                 {
-                    var line = reader.ReadLine();
-                    var values = line.Split(';');
-                    Decimal.TryParse(values[2], out abix);
+                    var line = reader.ReadLine(); // loe rida failist
+                    var values = line.Split(';'); // tükelda rida tükkideks
+                    Decimal.TryParse(values[2], out trPrice);
+                    Decimal.TryParse(values[3], out htPrice);
                     _trips.Add(new Trip()
                     {
                         ProjectName = values[0],
                         TripName = values[1],
-                        TripPrice = abix,
-                        //Complete = (rnd.Next(1, 20) % 2 == 0)
+                        TripPrice = trPrice,
+                        //Complete = (rnd.Next(1, 20) % 2 == 0),
+                        Complete = false,
+                        HotelPrice = htPrice
                     });
 
                 }
-                while (!reader.EndOfStream)
-                {
-                    var line = reader.ReadLine();
-                    var values = line.Split(';');
-                    Decimal.TryParse(values[2], out abix);
-                    _hotels.Add(new Trip()
-                    {
-                        ProjectName = values[0],
-                        HotelPrice = abix,
-                        //Complete = (rnd.Next(1, 20) % 2 == 0)
-                    });
-                }
+                
             }
 
             //// Generate some trip data and add it to the trip list.
